@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="21" name="eatery-v1">
+    <Basepaths>/v1/eatery</Basepaths>
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1503322857259</CreatedAt>
+    <CreatedBy>kurtkanaskie@google.com</CreatedBy>
+    <Description>Labs Complete</Description>
+    <DisplayName>eatery-v1 complete</DisplayName>
+    <LastModifiedAt>1503323716595</LastModifiedAt>
+    <LastModifiedBy>kurtkanaskie@google.com</LastModifiedBy>
+    <Policies>
+        <Policy>AM-MashupTruckRatings</Policy>
+        <Policy>AM-QuotaViolation</Policy>
+        <Policy>AM-RatingsResponse</Policy>
+        <Policy>BA-AssignCredentials</Policy>
+        <Policy>EV-RatingsProperties</Policy>
+        <Policy>EV-TruckNameFromPath</Policy>
+        <Policy>JS-CleanRatings</Policy>
+        <Policy>JT-LimitDepthAndCount</Policy>
+        <Policy>KV-TargetCredentials</Policy>
+        <Policy>OA-VerifyAccessToken</Policy>
+        <Policy>QU-50pm</Policy>
+        <Policy>RC-Chef</Policy>
+        <Policy>RF-NotFound</Policy>
+        <Policy>SA-200ps</Policy>
+        <Policy>SC-GetTruckRating</Policy>
+        <Policy>VA-QueryParam</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://JS-CleanRatings.js</Resource>
+    </Resources>
+    <Spec></Spec>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>baas</TargetEndpoint>
+        <TargetEndpoint>default</TargetEndpoint>
+    </TargetEndpoints>
+    <validate>false</validate>
+</APIProxy>

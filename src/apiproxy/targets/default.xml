@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TargetEndpoint name="default">
+    <Description/>
+    <FaultRules/>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>KV-TargetCredentials</Name>
+            </Step>
+            <Step>
+                <Name>BA-AssignCredentials</Name>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response>
+            <Step>
+                <Name>RC-Chef</Name>
+            </Step>
+        </Response>
+    </PostFlow>
+    <Flows/>
+    <HTTPTargetConnection>
+        <Properties/>
+        <!-- <URL>https://apigee-edu-prod.apigee.net/v1/apieatery</URL> -->
+        <LoadBalancer>
+            <Server name="Eatery"/>
+        </LoadBalancer>
+        <Path>/v1/apieatery</Path>
+    </HTTPTargetConnection>
+</TargetEndpoint>

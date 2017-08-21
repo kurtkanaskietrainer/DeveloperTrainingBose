@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <Description/>
+    <FaultRules>
+        <FaultRule name="QuotaViolation">
+            <Condition>fault.name == "QuotaViolation"</Condition>
+            <Step>
+                <Name>AM-QuotaViolation</Name>
+            </Step>
+        </FaultRule>
+    </FaultRules>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>VA-QueryParam</Name>
+            </Step>
+            <Step>
+                <Name>SA-200ps</Name>
+            </Step>
+            <Step>
+                <Name>QU-50pm</Name>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <Flows>
+        <Flow name="/chefs">
+            <Description>Create chef</Description>
+            <Request>
+                <Step>
+                    <Name>JT-LimitDepthAndCount</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/chefs") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="/chefs**">
+            <Description>Get chefs</Description>
+            <Request>
+                <Step>
+                    <Name>RC-Chef</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/chefs**") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="/trucks/*">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>EV-TruckNameFromPath</Name>
+                </Step>
+                <Step>
+                    <Name>SC-GetTruckRating</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>JS-CleanRatings</Name>
+                </Step>
+                <Step>
+                    <Name>AM-MashupTruckRatings</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/trucks/*") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="/trucks**">
+            <Description>Get trucks</Description>
+            <Request/>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/trucks**") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="/ratings**">
+            <Description/>
+            <Request/>
+            <Response>
+                <Step>
+                    <Name>EV-RatingsProperties</Name>
+                </Step>
+                <Step>
+                    <Name>AM-RatingsResponse</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/ratings**") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="default">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>RF-NotFound</Name>
+                </Step>
+            </Request>
+            <Response/>
+        </Flow>
+    </Flows>
+    <HTTPProxyConnection>
+        <BasePath>/v1/eatery</BasePath>
+        <Properties/>
+        <VirtualHost>default</VirtualHost>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="baasRoute">
+        <TargetEndpoint>baas</TargetEndpoint>
+        <!--<Condition>(proxy.pathsuffix MatchesPath "/ratings**") or (proxy.pathsuffix MatchesPath "/trucks/*")</Condition>-->
+        <Condition>(proxy.pathsuffix MatchesPath "/ratings**")</Condition>
+    </RouteRule>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+</ProxyEndpoint>

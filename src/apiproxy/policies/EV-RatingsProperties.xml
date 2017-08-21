@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables async="false" continueOnError="false" enabled="true" name="EV-RatingsProperties">
+    <DisplayName>EV-RatingsProperties</DisplayName>
+    <Properties/>
+    <Properties/>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <JSONPayload>
+        <Variable name="comment">
+            <JSONPath>$.entities[0].comment</JSONPath>
+        </Variable>
+        <Variable name="commenter">
+            <JSONPath>$.entities[0].commenter</JSONPath>
+        </Variable>
+        <Variable name="score">
+            <JSONPath>$.entities[0].score</JSONPath>
+        </Variable>
+        <Variable name="truck">
+            <JSONPath>$.entities[0].truck</JSONPath>
+        </Variable>
+    </JSONPayload>
+    <Source clearPayload="false">response</Source>
+</ExtractVariables>

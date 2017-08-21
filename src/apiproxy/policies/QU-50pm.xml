@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Quota async="false" continueOnError="false" enabled="true" name="QU-50pm" type="rollingwindow">
+    <DisplayName>QU-50pm</DisplayName>
+    <Properties/>
+    <Allow count="5" countRef="verifyapikey.VA-QueryParam.apiproduct.developer.quota.limit"/>
+    <Interval ref="verifyapikey.VA-QueryParam.apiproduct.developer.quota.interval">1</Interval>
+    <TimeUnit ref="verifyapikey.VA-QueryParam.apiproduct.developer.quota.timeunit">minute</TimeUnit>
+    <Distributed>true</Distributed>
+    <Synchronous>true</Synchronous>
+</Quota><!--
+    <Distributed>true</Distributed>
+    <Synchronous>true</Synchronous>
+    <Distributed>false</Distributed>
+    <Synchronous>false</Synchronous><AsynchronousConfiguration> 
+      <SyncIntervalInSeconds>30</SyncIntervalInSeconds> 
+      <SyncMessageCount>20</SyncMessageCount> 
+   </AsynchronousConfiguration>
+   -->

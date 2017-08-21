@@ -1,0 +1,790 @@
+{
+	"variables": [],
+	"info": {
+		"name": "BOSE-training",
+		"_postman_id": "7d1ad39d-e460-03b2-70b3-f37ab31c941b",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "apieatery auth",
+			"description": "",
+			"item": [
+				{
+					"name": "http://kkanaskietraining-test.apigee.net/v1/apieatery/ratings",
+					"request": {
+						"url": "http://kkanaskietraining-test.apigee.net/v1/apieatery/chefs",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic Zm91bmRhdGlvblVzZXI6VGVzdDEyMzQ=",
+								"description": ""
+							},
+							{
+								"key": "Wrong",
+								"value": "Basic Zm91bmRhdGlvblVzZXI6VGVzdDExMTE=",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lab-01-01",
+			"description": "",
+			"item": [
+				{
+					"name": "{{BAASORG}}/sandbox/users",
+					"request": {
+						"url": "{{BAASORG}}/sandbox/users",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lab-04-01",
+			"description": "",
+			"item": [
+				{
+					"name": "/v1/eatery",
+					"request": {
+						"url": "{{HOST}}/v1/eatery",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lab-04-02 3",
+			"description": "",
+			"item": [
+				{
+					"name": "/v1/eatery/chefs",
+					"request": {
+						"url": "{{HOST}}/v1/eatery/chefs",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lab-06-01 apikey",
+			"description": "",
+			"item": [
+				{
+					"name": "/v1/eatery/chefs",
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/v1/eatery/chefs?apikey=nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"eatery",
+								"chefs"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/v1/eatery/chefs/kurtkanaskie",
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/v1/eatery/chefs/kurtkanaskie?apikey=nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"eatery",
+								"chefs",
+								"kurtkanaskie"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lab-06-02 oauth",
+			"description": "",
+			"item": [
+				{
+					"name": "/v1/eatery/chefs token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"200 OK\"] = responseCode.code === 200;",
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+									"postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/oauth/client_credential/accesstoken?grant_type=client_credentials",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"oauth",
+								"client_credential",
+								"accesstoken"
+							],
+							"query": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic {{clientBasicAuth}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/v1/eatery/chefs token",
+					"request": {
+						"url": "{{HOST}}/v1/eatery/chefs",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/v1/eatery/chefs apikey",
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/v1/eatery/chefs?apikey=nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"eatery",
+								"chefs"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lab-06-03 spike quota",
+			"description": "",
+			"item": [
+				{
+					"name": "/v1/eatery/chefs OK",
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/v1/eatery/chefs?apikey=nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"eatery",
+								"chefs"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"KurtKanaskie\",\n    \"education\": \"Street\",\n    \"description\": \"Da bomb\",\n    \"tagline\": \"I love me some beers testing my api\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/v1/eatery/chefs too many",
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/v1/eatery/chefs?apikey=nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"eatery",
+								"chefs"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"KurtKanaskie\",\n    \"education\": \"Street\",\n    \"description\": \"Da bomb\",\n    \"tagline\": \"I love me some beers testing my api\",\n    \"hack\":\"Oh no you dont\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/v1/eatery/chefs too deep",
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/v1/eatery/chefs?apikey=nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"eatery",
+								"chefs"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"badParent\" : {\n    \t\"name\": \"KurtKanaskie\",\n\t    \"education\": \"Street\",\n\t    \"description\": \"Da bomb\",\n\t    \"tagline\": \"I love me some beers testing my api\"\n    }\n}\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/v1/eatery/chefs (7)",
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/v1/eatery/chefs?apikey={{clientId}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"eatery",
+								"chefs"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "{{clientId}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lab-07-01 fault handling",
+			"description": "",
+			"item": [
+				{
+					"name": "/v1/eatery/chefs OK",
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/v1/eatery/chefs?apikey=nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"eatery",
+								"chefs"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"KurtKanaskie\",\n    \"education\": \"Street\",\n    \"description\": \"Da bomb\",\n    \"tagline\": \"I love me some beers testing my api\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/v1/eatery/chefs too many",
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/v1/eatery/chefs?apikey=nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"eatery",
+								"chefs"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"KurtKanaskie\",\n    \"education\": \"Street\",\n    \"description\": \"Da bomb\",\n    \"tagline\": \"I love me some beers testing my api\",\n    \"hack\":\"Oh no you dont\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/v1/eatery/chefs too deep",
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/v1/eatery/chefs?apikey=nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"eatery",
+								"chefs"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "nPaStNrALGAf2YqLixUJJUuSvYTewP0R",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"badParent\" : {\n    \t\"name\": \"KurtKanaskie\",\n\t    \"education\": \"Street\",\n\t    \"description\": \"Da bomb\",\n\t    \"tagline\": \"I love me some beers testing my api\"\n    }\n}\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/v1/eatery/chefs (7)",
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/v1/eatery/chefs?apikey={{clientId}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"eatery",
+								"chefs"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "{{clientId}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "/v1/eatery/ratings not found",
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/v1/eatery/ratings?apikey={{clientId}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"eatery",
+								"ratings"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "{{clientId}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lab-08-01 BaaS",
+			"description": "",
+			"item": [
+				{
+					"name": "{{BAASORG}}/sandbox/trucks",
+					"request": {
+						"url": "{{BAASORG}}/sandbox/trucks",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "{{BAASORG}}/sandbox/ratings",
+					"request": {
+						"url": "{{BAASORG}}/sandbox/ratings",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lab-08-02 ratings",
+			"description": "",
+			"item": [
+				{
+					"name": "/v1/eatery/ratings OK",
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/v1/eatery/ratings?apikey={{clientId}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"eatery",
+								"ratings"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "{{clientId}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lab-09-01 trucks",
+			"description": "",
+			"item": [
+				{
+					"name": "/v1/eatery/trucks/AMS1234",
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/v1/eatery/trucks/AMS1234?apikey={{clientId}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"eatery",
+								"trucks",
+								"AMS1234"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "{{clientId}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Lab-09-02 trucks mashup and cleanup",
+			"description": "",
+			"item": [
+				{
+					"name": "/v1/eatery/trucks/AMS1234 Mashup",
+					"request": {
+						"url": {
+							"raw": "{{HOST}}/v1/eatery/trucks/AMS1234?apikey={{clientId}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"v1",
+								"eatery",
+								"trucks",
+								"AMS1234"
+							],
+							"query": [
+								{
+									"key": "apikey",
+									"value": "{{clientId}}",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Z API Mgmt",
+			"description": "",
+			"item": [
+				{
+					"name": "Get TargetServers",
+					"request": {
+						"url": "{{MGMTSVR}}/v1/o/{{ORG}}/e/{{ENV}}/targetservers",
+						"method": "GET",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic {{BASICAUTH}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add TargetServer EaterySecure",
+					"request": {
+						"url": "{{MGMTSVR}}/v1/o/{{ORG}}/e/{{ENV}}/targetservers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "content-type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic {{BASICAUTH}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"host\": \"apigee-edu-prod.apigee.net\",\n  \"isEnabled\": true,\n  \"name\": \"EaterySecure\",\n  \"port\": 443,\n  \"sSLInfo\": {\n    \"ciphers\": [],\n    \"clientAuthEnabled\": \"false\",\n    \"enabled\": \"true\",\n    \"ignoreValidationErrors\": false,\n    \"protocols\": []\n  }\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

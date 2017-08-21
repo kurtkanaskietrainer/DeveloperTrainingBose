@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="false" enabled="true" name="SC-GetTruckRating">
+    <DisplayName>SC-GetTruckRating</DisplayName>
+    <Properties/>
+    <Request clearPayload="true" variable="myRequest">
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+        <Set>
+            <Verb>GET</Verb>
+            <QueryParams>
+                <QueryParam name="ql">select * where truck='{truckname}'</QueryParam>
+                <!--<QueryParam name="ql">truck='{truckname}'</QueryParam> Alternate -->
+            </QueryParams>
+        </Set>
+    </Request>
+    <Response>ratingsResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>https://apibaas-trial.apigee.net/kurtkanaskietraining/sandbox/ratings</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>
